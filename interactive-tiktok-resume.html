@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anushka Sirpurkar - TikTok Resume</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    
+    body {
+      background-color: #000;
+      color: #fff;
+      line-height: 1.5;
+    }
+    
+    .app-container {
+      max-width: 450px;
+      margin: 0 auto;
+      position: relative;
+      height: 100vh;
+      overflow-y: auto;
+      background-color: #121212;
+    }
+    
+    /* Top Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background-color: #000;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .nav-tabs {
+      display: flex;
+      width: 100%;
+      justify-content: space-around;
+      border-bottom: 1px solid #2f2f2f;
+    }
+    
+    .nav-tab {
+      padding: 12px 0;
+      font-size: 15px;
+      font-weight: 600;
+      color: #aaa;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .nav-tab.active {
+      color: #fff;
+    }
+    
+    .nav-tab.active:after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 40%;
+      width: 20%;
+      height: 2px;
+      background-color: #fff;
+    }
+    
+    /* Profile Section */
+    .profile-section {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-bottom: 1px solid #2f2f2f;
+    }
+    
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #ff3b5c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 40px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .profile-username {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    
+    .profile-handle {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 16px;
+    }
+    
+    .profile-stats {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 16px;
+    }
+    
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .stat-value {
+      font-weight: 600;
+    }
+    
+    .stat-label {
+      font-size: 13px;
+      color: #aaa;
+    }
+    
+    .profile-bio {
+      text-align: center;
+      margin-bottom: 16px;
+      font-size: 14px;
+      max-width: 80%;
+    }
+    
+    .profile-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+    
+    .button-container {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .primary-button {
+      padding: 8px 24px;
+      border-radius: 4px;
+      background-color: #fe2c55;
+      color: white;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .secondary-button {
+      padding: 8px 24px;
+      border-radius: 4px;
+      background-color: transparent;
+      color: white;
+      font-weight: 600;
+      border: 1px solid #555;
+      cursor: pointer;
+    }
+    
+    /* Tab Navigation */
+    .content-tabs {
+      display: flex;
+      justify-content: space-around;
+      border-bottom: 1px solid #2f2f2f;
+    }
+    
+    .content-tab {
+      padding: 15px 0;
+      font-size: 18px;
+      color: #aaa;
+      width: 33.3%;
+      text-align: center;
+      cursor: pointer;
+    }
+    
+    .content-tab.active {
+      color: #fff;
+      border-bottom: 2px solid #fe2c55;
+    }
+    
+    /* Content Sections */
+    .content-section {
+      padding: 16px;
+      display: none;
+    }
+    
+    .content-section.active {
+      display: block;
+    }
+    
+    /* Experience Grid */
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    
+    .experience-item {
+      position: relative;
+      background-color: #2f2f2f;
+      border-radius: 8px;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .exp-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8));
+    }
+    
+    .company-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -65%);
+      font-size: 32px;
+      color: white;
+      text-align: center;
+    }
+    
+    .exp-details {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5), transparent);
+    }
+    
+    .exp-company {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    
+    .exp-title {
+      font-size: 12px;
+      color: #eee;
+    }
+    
+    .exp-date {
+      font-size: 10px;
+      color: #aaa;
+      margin-top: 2px;
+    }
+    
+    .views {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      font-size: 10px;
+      color: #aaa;
+    }
+    
+    /* Skills Section */
+    .skills-container {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .skill-tag {
+      padding: 6px 12px;
+      background-color: #2f2f2f;
+      border-radius: 16px;
+      font-size: 12px;
+    }
+    
+    .highlight {
+      color: #fe2c55;
+    }
+    
+    /* Education Section */
+    .education-item {
+      background-color: #2f2f2f;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .edu-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .edu-school {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    
+    .edu-date {
+      font-size: 12px;
+      color: #aaa;
+    }
+    
+    /* Detailed Experience Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      z-index: 200;
+      overflow-y: auto;
+    }
+    
+    .modal-content {
+      position: relative;
+      max-width: 450px;
+      margin: 60px auto 0;
+      background-color: #121212;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .modal-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    
+    .modal-subtitle {
+      font-size: 16px;
+      color: #fe2c55;
+      margin-bottom: 16px;
+    }
+    
+    .modal-body {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    
+    .bullet-points {
+      padding-left: 20px;
+      margin: 12px 0;
+    }
+    
+    .bullet-points li {
+      margin-bottom: 8px;
+    }
+    
+    /* For mobile screens */
+    @media (max-width: 480px) {
+      .app-container {
+        width: 100%;
+        height: 100vh;
+      }
+      
+      .experience-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    /* TikTok Logo */
+    .tiktok-logo {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 450px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background-color: #000;
+      padding: 10px 0;
+      border-top: 1px solid #2f2f2f;
+    }
+    
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 10px;
+      color: #aaa;
+    }
+    
+    .bottom-nav-item.active {
+      color: #fff;
+    }
+    
+    .bottom-nav-icon {
+      font-size: 20px;
+      margin-bottom: 3px;
+    }
+    
+    /* Certification Badge */
+    .certification-badge {
+      background-color: #00f2ea;
+      color: #000;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      margin-left: 5px;
+    }
+    
+    /* Loading Indicator */
+    .loader {
+      width: 100%;
+      height: 3px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 300;
+      background: linear-gradient(to right, #fe2c55, #00f2ea);
+      animation: loading 2s ease-in-out infinite;
+    }
+    
+    @keyframes loading {
+      0% { width: 0%; }
+      50% { width: 70%; }
+      100% { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="loader"></div>
+  
+  <div class="app-container">
+    <!-- Top Navigation -->
+    <div class="top-nav">
+      <div class="nav-tabs">
+        <div class="nav-tab">Following</div>
+        <div class="nav-tab active">For You</div>
+        <div class="nav-tab">Search</div>
+      </div>
+    </div>
+    
+    <!-- Profile Section -->
+    <div class="profile-section">
+      <div class="profile-avatar">A</div>
+      <h1 class="profile-username">Anushka Sirpurkar</h1>
+      <p class="profile-handle">@anushkasirpurkar</p>
+      
+      <div class="profile-stats">
+        <div class="stat">
+          <span class="stat-value">3+</span>
+          <span class="stat-label">Years Exp</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">10TB+</span>
+          <span class="stat-label">Daily Data</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">99.9%</span>
+          <span class="stat-label">Accuracy</span>
+        </div>
+      </div>
+      
+      <p class="profile-bio">Data Engineer | AWS Certified Cloud Practitioner <span class="certification-badge">AWS</span></p>
+      
+      <div class="profile-links">
+        <div>📍 Bellevue, WA</div>
+        <div>📧 sirpurkaranushka7@gmail.com</div>
+        <div>📱 (413) 275-6066</div>
+        <div>🔗 github.com/aspk74 | linkedin.com/in/asirpurkar7</div>
+      </div>
+      
+      <div class="button-container">
+        <button class="primary-button">Contact</button>
+        <button class="secondary-button">Resume</button>
+      </div>
+    </div>
+    
+    <!-- Content Tabs -->
+    <div class="content-tabs">
+      <div class="content-tab active" data-tab="experience">Experience</div>
+      <div class="content-tab" data-tab="skills">Skills</div>
+      <div class="content-tab" data-tab="education">Education</div>
+    </div>
+    
+    <!-- Experience Section -->
+    <div class="content-section active" id="experience">
+      <div class="experience-grid">
+        <div class="experience-item" data-id="sanford">
+          <div class="exp-bg" style="background-color: #4a58d5;"></div>
+          <div class="company-logo">SH</div>
+          <div class="exp-details">
+            <div class="exp-company">Sanford Health</div>
+            <div class="exp-title">Supply Chain Analyst</div>
+            <div class="exp-date">Jul 2024 - Present</div>
+            <div class="views">10.5K views</div>
+          </div>
+        </div>
+        
+        <div class="experience-item" data-id="umass">
+          <div class="exp-bg" style="background-color: #881c1c;"></div>
+          <div class="company-logo">UM</div>
+          <div class="exp-details">
+            <div class="exp-company">UMass Amherst</div>
+            <div class="exp-title">Research Assistant</div>
+            <div class="exp-date">May 2023 - Aug 2023</div>
+            <div class="views">7.2K views</div>
+          </div>
+        </div>
+        
+        <div class="experience-item" data-id="fiserv">
+          <div class="exp-bg" style="background-color: #1e78b6;"></div>
+          <div class="company-logo">AF</div>
+          <div class="exp-details">
+            <div class="exp-company">AK Fiserv</div>
+            <div class="exp-title">Data Engineer</div>
+            <div class="exp-date">Mar 2022 - Aug 2022</div>
+            <div class="views">9.1K views</div>
+          </div>
+        </div>
+        
+        <div class="experience-item" data-id="vodafone">
+          <div class="exp-bg" style="background-color: #e60000;"></div>
+          <div class="company-logo">VF</div>
+          <div class="exp-details">
+            <div class="exp-company">Vodafone</div>
+            <div class="exp-title">Data Engineer (GET)</div>
+            <div class="exp-date">Jul 2021 - Feb 2022</div>
+            <div class="views">6.5K views</div>
+          </div>
+        </div>
+        
+        <div class="experience-item" data-id="genai-project">
+          <div class="exp-bg" style="background-color: #1DB954;"></div>
+          <div class="company-logo">🤖</div>
+          <div class="exp-details">
+            <div class="exp-company">Project</div>
+            <div class="exp-title">GenAI PDF Summarization</div>
+            <div class="exp-date">May 2024</div>
+            <div class="views">8.7K views</div>
+          </div>
+        </div>
+        
+        <div class="experience-item" data-id="sentiment-project">
+          <div class="exp-bg" style="background-color: #4a5568;"></div>
+          <div class="company-logo">📊</div>
+          <div class="exp-details">
+            <div class="exp-company">Project</div>
+            <div class="exp-title">Customer Sentiment Analysis</div>
+            <div class="exp-date">Dec 2024</div>
+            <div class="views">12.3K views</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Skills Section -->
+    <div class="content-section" id="skills">
+      <h3>Technical Skills</h3>
+      <div class="skills-container">
+        <div class="skill-tag">Python</div>
+        <div class="skill-tag">SQL</div>
+        <div class="skill-tag">PySpark</div>
+        <div class="skill-tag">Kafka</div>
+        <div class="skill-tag">AWS Glue</div>
+        <div class="skill-tag">Airflow</div>
+        <div class="skill-tag">dbt</div>
+        <div class="skill-tag">CI/CD</div>
+        <div class="skill-tag">Docker</div>
+        <div class="skill-tag">Git</div>
+        <div class="skill-tag">Snowflake</div>
+        <div class="skill-tag">MongoDB</div>
+        <div class="skill-tag">Delta Lake</div>
+        <div class="skill-tag">REST APIs</div>
+        <div class="skill-tag">GraphQL</div>
+        <div class="skill-tag">TypeScript</div>
+      </div>
+      
+      <h3 style="margin-top: 24px;">Infrastructure</h3>
+      <div class="skills-container">
+        <div class="skill-tag">AWS <span class="certification-badge">Certified</span></div>
+        <div class="skill-tag">S3</div>
+        <div class="skill-tag">IAM</div>
+        <div class="skill-tag">KMS</div>
+        <div class="skill-tag">SageMaker</div>
+        <div class="skill-tag">Jenkins</div>
+        <div class="skill-tag">GitHub Actions</div>
+      </div>
+      
+      <h3 style="margin-top: 24px;">Publications</h3>
+      <div class="skills-container">
+        <div class="skill-tag">Building Scalable ETL Pipelines (Apr 2025)</div>
+        <div class="skill-tag">Kafka & Spark Pipelines (Mar 2025)</div>
+        <div class="skill-tag">Airflow & Flyte Workflows (Jan 2025)</div>
+      </div>
+    </div>
+    
+    <!-- Education Section -->
+    <div class="content-section" id="education">
+      <div class="education-item">
+        <div class="edu-title">Master of Science in Business Analytics</div>
+        <div class="edu-school">University of Massachusetts, Amherst</div>
+        <div class="edu-date">Graduated: December 2023</div>
+      </div>
+      
+      <div class="education-item">
+        <div class="edu-title">Bachelor of Engineering in Information Technology</div>
+        <div class="edu-school">Pune Institute of Computer Technology</div>
+        <div class="edu-date">Graduated: June 2021</div>
+      </div>
+      
+      <div class="education-item">
+        <div class="edu-title">AWS Certified Cloud Practitioner</div>
+        <div class="edu-school">Amazon Web Services</div>
+        <div class="edu-date">Certification</div>
+      </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+      <div class="bottom-nav-item">
+        <div class="bottom-nav-icon">🏠</div>
+        <div>Home</div>
+      </div>
+      <div class="bottom-nav-item">
+        <div class="bottom-nav-icon">🔍</div>
+        <div>Discover</div>
+      </div>
+      <div class="bottom-nav-item">
+        <div class="bottom-nav-icon">➕</div>
+        <div>Upload</div>
+      </div>
+      <div class="bottom-nav-item">
+        <div class="bottom-nav-icon">💬</div>
+        <div>Inbox</div>
+      </div>
+      <div class="bottom-nav-item active">
+        <div class="bottom-nav-icon">👤</div>
+        <div>Profile</div>
+      </div>
+    </div>
+    
+    <div class="tiktok-logo">
+      <span style="color: #00f2ea;">Tik</span>
+      <span style="color: #fe2c55;">Tok</span>
+    </div>
+  </div>
+  
+  <!-- Experience Modals -->
+  <div class="modal" id="modal-sanford">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 class="modal-title">Supply Chain Analyst / Data Engineering Focus</h2>
+      <h3 class="modal-subtitle">Sanford Health | Jul 2024 - Present</h3>
+      <div class="modal-body">
+        <ul class="bullet-points">
+          <li>Architected scalable data ingestion framework using AWS Glue & PySpark, processing 10TB+ data daily with 99.99% reliability</li>
+          <li>Led time-critical migration of PBs of reporting data from legacy systems to modern lakehouse in Fabric, achieving zero data loss</li>
+          <li>Created robust data catalog & lineage tracking system for migrated assets, enhancing governance across the data ecosystem</li>
+          <li>Optimized query performance on lakehouse platform, reducing report generation time by 87% while supporting 3x more users</li>
+          <li>Implemented data validation framework with PySpark & Great Expectations, achieving <0.001% error rate during migration</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" id="modal-umass">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 class="modal-title">Student Research Assistant</h2>
+      <h3 class="modal-subtitle">University of Massachusetts | May 2023 - Aug 2023</h3>
+      <div class="modal-body">
+        <ul class="bullet-points">
+          <li>Led development of a Python-based monitoring application using Airflow to track files received from UMass Agriculture School</li>
+          <li>Streamlined data hygiene & optimized storage by automating the archival of older files in the HANA transport folder using Airflow</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" id="modal-fiserv">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 class="modal-title">Data Engineer</h2>
+      <h3 class="modal-subtitle">AK Fiserv | Mar 2022 - Aug 2022</h3>
+      <div class="modal-body">
+        <ul class="bullet-points">
+          <li>Built a PySpark & Great Expectations framework to validate 1M+ records daily, with 99.9% accuracy for compliance reporting</li>
+          <li>Developed CI/CD workflows with GitHub Actions for secure application deployment & reducing configuration errors by 30%</li>
+          <li>Configured IAM roles, S3 policies, & AWS KMS to enforce strict access controls & encryption for financial data, reducing breaches</li>
+          <li>Created dashboards to track compliance metrics & audit trails, enabling stakeholders to identify potential risks & take action</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" id="modal-vodafone">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 class="modal-title">Data Engineer (GET)</h2>
+      <h3 class="modal-subtitle">Vodafone | Jul 2021 - Feb 2022</h3>
+      <div class="modal-body">
+        <ul class="bullet-points">
+          <li>Built a real-time Kafka & Spark Streaming pipeline processing 10M+ events/hr, cutting downtime by 20% via proactive detection</li>
+          <li>Deployed a churn prediction model using PySpark MLlib & SageMaker, achieving 85% accuracy & reducing churn rate by 10%</li>
+          <li>Migrated on-premise data to a data lake on S3, improving retrieval times by 30% & enabling scalable storage for 100+ TB of data</li>
+          <li>Designed an ETL pipeline with Airflow & AWS Glue, slashing data prep time from 4 hours to 30 minutes, for TBs of customer data</li>
+          <li>Created dashboards to visualize customer usage patterns & network performance, with optimized dbt models & Airflow DAGs</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" id="modal-genai-project">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 class="modal-title">Interactive GenAI PDF Summarization with ChatGPT</h2>
+      <h3 class="modal-subtitle">Project | May 2024</h3>
+      <div class="modal-body">
+        <ul class="bullet-points">
+          <li>Built GenAI PDF-GPT, a web app using OpenAI's ChatGPT API & Retrieval-Augmented Generation (RAG) for document analysis</li>
+          <li>Leveraged ChatGPT's summarization capabilities & LangChain to extract insights from PDFs & designed a chat interface for users</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" id="modal-sentiment-project">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 class="modal-title">Real-time Customer Sentiment Analysis</h2>
+      <h3 class="modal-subtitle">Project | Dec 2024</h3>
+      <div class="modal-body">
+        <ul class="bullet-points">
+          <li>Built a real-time customer feedback analysis tool using Kafka, Spark & MLlib, with 90% accuracy in sentiment classification (RAG)</li>
+          <li>Stored processed data in Delta Lake for efficient querying & analysis, enabling real-time monitoring of sentiment trends</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Tab switching functionality
+    document.querySelectorAll('.content-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tabName = tab.getAttribute('data-tab');
+        
+        // Update active tab
+        document.querySelectorAll('.content-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Show active content section
+        document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+      });
+    });
+    
+    // Experience item click handlers
+    document.querySelectorAll('.experience-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const id = item.getAttribute('data-id');
+        document.getElementById(`modal-${id}`).style.display = 'block';
+      });
+    });
+    
+    // Close modal handlers
+    document.querySelectorAll('.close-modal').forEach(closeBtn => {
+      closeBtn.addEventListener('click', () => {
+        closeBtn.closest('.modal').style.display = 'none';
+      });
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+      document.querySelectorAll('.modal').forEach(modal => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+    });
+    
+    // Button handlers
+    document.querySelector('.primary-button').addEventListener('click', () => {
+      alert('Contact information: sirpurkaranushka7@gmail.com | (413) 275-6066');
+    });
+    
+    document.querySelector('.secondary-button').addEventListener('click', () => {
+      alert('Resume downloaded successfully!');
+    });
+    
+    // Simulate video loading
+    setTimeout(() => {
+      document.querySelector('.loader').style.display = 'none';
+    }, 2000);
+  </script>
+</body>
+</html>
